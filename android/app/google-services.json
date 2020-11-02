@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "706698711565",
+    "firebase_url": "https://tecuido-301fc.firebaseio.com",
+    "project_id": "tecuido-301fc",
+    "storage_bucket": "tecuido-301fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706698711565:android:5d9682e0e30dffb2473b44",
+        "android_client_info": {
+          "package_name": "com.example.proyecto_final_2020_2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706698711565-rj03in1h5per77upgc6o45oe5d7kgm34.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdE1I_VV-AVbxZcbgjax-MPPFMfEqRBQc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706698711565-rj03in1h5per77upgc6o45oe5d7kgm34.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,83 +1,39 @@
 import 'package:flutter/material.dart';
-import 'Iniciarsecion.dart';
-import 'registrarse.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:proyecto_final_2020_2/pages/loading_page.dart';
+import 'package:proyecto_final_2020_2/pages/root_page.dart';
+import 'package:proyecto_final_2020_2/pages/wrong_page.dart';
 
-void main() => runApp(MyHome());
+import 'classes/auth_firebase.dart';
 
-class MyHome extends StatelessWidget{
- 
- @override
- Widget build(BuildContext context){
-   return MaterialApp(
-     title: 'My nav',
-     theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Home(),
-
-
-   );
-
- }
-
+void main() {
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
 }
 
-class Home extends StatelessWidget{
-  final controler1 = TextEditingController();
-   @override
-   Widget build(BuildContext context){
-     return Scaffold(
-       appBar: AppBar(
-         title: Text('My app'),
-       ),
-       body: ListView
-       (children: <Widget>[
-            
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-               TextField(
-          obscureText: false,
-        	decoration: InputDecoration(
-          	border: OutlineInputBorder(),
-          	hintText: "Email",
-        	),
-      	),
-        
-         TextField(
-          obscureText: true,
-        	decoration: InputDecoration(
-          	border: OutlineInputBorder(),
-          	hintText: "Pasword",
-        	),
-      	),
-             _row(context, "Iniciar",
-              Iniciar()), 
-              _row(context, "Registrate",
-              Registrate()),
-             // Navegar()
-            ],
-          ),
-        ])
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      // Initialize FlutterFire
+      future: Firebase.initializeApp(),
+      builder: (context, snapshot) {
+        // Check for errors
+        if (snapshot.hasError) {
+          return WrongPage();
+        }
 
-     );
+        // Once complete, show your application
+        if (snapshot.connectionState == ConnectionState.done) {
+          return RootPage(
+            auth: new AuthFirebase(),
+          );
+        }
 
-   }
-}
-
-Widget _row(BuildContext context, String text, Widget destination) {
-    return Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          RaisedButton(
-              onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => destination),
-                    )
-                  },
-              child: Text(text)),
-          SizedBox(height: 20.0)
-        ]);
+        // Otherwise, show something whilst waiting for initialization to complete
+        return LoadingPage();
+      },
+    );
   }
-
+}

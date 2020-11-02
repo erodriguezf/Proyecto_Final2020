@@ -22,11 +22,13 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     widget.auth.auth.authStateChanges().listen((User user) {
-      if (user == null) {
-        authStatus = AuthStatus.notSignIn;
-      } else {
-        authStatus = AuthStatus.singedIn;
-      }
+      setState(() {
+        if (user == null) {
+          authStatus = AuthStatus.notSignIn;
+        } else {
+          authStatus = AuthStatus.singedIn;
+        }
+      });
     });
     super.initState();
   }

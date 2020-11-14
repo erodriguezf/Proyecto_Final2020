@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
             auth: new AuthFirebase(),
           );
         }
-
         // Otherwise, show something whilst waiting for initialization to complete
         return LoadingPage();
       },

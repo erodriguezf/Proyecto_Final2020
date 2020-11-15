@@ -1,9 +1,9 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:proyecto_final_2020_2/classes/foto.dart';
 import 'package:proyecto_final_2020_2/pages/addImage.dart';
 
 class Gallery extends StatefulWidget {
@@ -15,41 +15,42 @@ class Gallery extends StatefulWidget {
 }
 
 class _GalleryState extends State<Gallery> {
-  bool loading;
-  List<String> fotos = new List<String>();
-  List<String> descripciones = new List<String>();
+  List<Foto> fotos = new List<Foto>();
   StreamSubscription<Event> onAddedSubs;
+  StreamSubscription<Event> onChangeSubs;
   DatabaseReference db = FirebaseDatabase.instance.reference();
 
   @override
   void initState() {
-    loading = true;
     String uid = widget.auth.auth.currentUser.uid;
     var query = db.child("Users").child(uid).child("gallery");
     onAddedSubs = query.onChildAdded.listen(onEntryAdded);
-    loading = false;
+    onChangeSubs = query.onChildChanged.listen(onEntryChanged);
     super.initState();
   }
 
   onEntryAdded(Event event) {
     setState(() {
-      fotos.add(event.snapshot.value['url']);
-      descripciones.add(event.snapshot.value['description']);
+      fotos.add(Foto.getFoto(event.snapshot));
     });
+  }
+
+  onEntryChanged(Event event) {
+    Foto oldEntry = fotos.singleWhere((entry) {
+      return entry.key == event.snapshot.key;
+    });
+    setState(() {
+      fotos[fotos.indexOf(oldEntry)] = Foto.getFoto(event.snapshot);
+    });
+  }
+
+  void disponse() {
+    onAddedSubs.cancel();
+    onChangeSubs.cancel();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (loading) {
-      return (Scaffold(
-        appBar: AppBar(
-          title: Text("Galeria de fotos"),
-        ),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ));
-    }
     return (Scaffold(
         appBar: AppBar(
           title: Text("Galeria de fotos"),
@@ -77,11 +78,11 @@ class _GalleryState extends State<Gallery> {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return ImagePage(
                     foto: fotos[index],
-                    descripcion: descripciones[index],
+                    auth: widget.auth,
                   );
                 }));
               },
-              child: Image.network(fotos[index]),
+              child: Image.network(fotos[index].url),
             );
           },
           itemCount: fotos.length,
@@ -90,16 +91,32 @@ class _GalleryState extends State<Gallery> {
 }
 
 class ImagePage extends StatelessWidget {
-  final String foto;
-  final String descripcion;
+  final Foto foto;
+  final AuthFirebase auth;
 
-  const ImagePage({Key key, this.foto, this.descripcion}) : super(key: key);
+  const ImagePage({Key key, this.foto, this.auth}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
+          actions: [
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AddImage(
+                                  auth: auth,
+                                  foto: foto,
+                                )));
+                  },
+                  child: Icon(Icons.edit),
+                )),
+          ],
         ),
         backgroundColor: Colors.black,
         body: Center(
@@ -108,7 +125,7 @@ class ImagePage extends StatelessWidget {
             Expanded(
               flex: 10,
               child: Image.network(
-                foto,
+                foto.url,
                 fit: BoxFit.contain,
               ),
             ),
@@ -117,7 +134,7 @@ class ImagePage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(15),
                 child: Text(
-                  descripcion,
+                  foto.description,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),

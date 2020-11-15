@@ -6,12 +6,16 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
+import 'package:proyecto_final_2020_2/classes/foto.dart';
+import 'package:proyecto_final_2020_2/pages/gallery.dart';
 import 'package:uuid/uuid.dart';
 
 class AddImage extends StatefulWidget {
   final AuthFirebase auth;
+  final Foto foto;
 
-  const AddImage({Key key, this.auth}) : super(key: key);
+  const AddImage({Key key, this.auth, this.foto}) : super(key: key);
+
   @override
   _AddImageState createState() => _AddImageState();
 }
@@ -21,36 +25,58 @@ class _AddImageState extends State<AddImage> {
   var description = TextEditingController();
   String urlImage;
   final ImagePicker picker = ImagePicker();
-  var uuid = Uuid();
+  var uuid = Uuid().v1();
+  final formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    if (widget.foto != null) {
+      description.text = widget.foto.description;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Agregar imagen"),
+          title: Text(widget.foto != null ? "Editar imagen" : "Agregar imagen"),
         ),
         body: SingleChildScrollView(
             padding: EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(
-                      icon: Icon(Icons.description),
-                      hintText: 'Agrege una nota a su imagen',
-                      labelText: 'Nota'),
-                  controller: description,
-                ),
-                RaisedButton(
-                    onPressed: imagenSelectorGallery,
-                    child: Text('Selecciona una imagen')),
-                SizedBox(
-                  child: showImage(),
-                ),
-                RaisedButton(
-                  onPressed: sendData,
-                  child: Text('Guardar'),
-                )
-              ],
-            )));
+            child: Form(
+                key: formKey,
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                          icon: Icon(Icons.description),
+                          hintText: 'Agrege una nota a su imagen',
+                          labelText: 'Nota'),
+                      controller: description,
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Por favor ingresa una nota';
+                        }
+                        return null;
+                      },
+                    ),
+                    RaisedButton(
+                        onPressed: imagenSelectorGallery,
+                        child: Text('Selecciona una imagen')),
+                    SizedBox(
+                      child: showImage(),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        if (formKey.currentState.validate()) {
+                          sendData();
+                        }
+                      },
+                      child: Text('Guardar'),
+                    )
+                  ],
+                ))));
   }
 
   Future<void> saveFirebase(String imageId) async {
@@ -58,7 +84,7 @@ class _AddImageState extends State<AddImage> {
       try {
         await firebase_storage.FirebaseStorage.instance
             .ref()
-            .child(uuid.v1())
+            .child(uuid)
             .putFile(File(galleryFile.path))
             .then((url) async {
           urlImage = await url.ref.getDownloadURL();
@@ -73,7 +99,14 @@ class _AddImageState extends State<AddImage> {
     if (galleryFile != null) {
       return Image.file(File(galleryFile.path));
     } else {
-      return Text('Imagen no seleccionada');
+      if (widget.foto != null) {
+        return Image.network(
+          widget.foto.url,
+          fit: BoxFit.contain,
+        );
+      } else {
+        return Text('Imagen no seleccionada');
+      }
     }
   }
 
@@ -85,9 +118,14 @@ class _AddImageState extends State<AddImage> {
           .child('Users')
           .child(uid)
           .child('gallery');
-
-      db.push().set(getimage()).then((_) {});
-      Navigator.pop(context);
+      if (widget.foto != null) {
+        db.child(widget.foto.key).set(getimage()).then((_) {});
+        Navigator.pop(context);
+        Navigator.pop(context);
+      } else {
+        db.child(uuid).set(getimage()).then((_) {});
+        Navigator.pop(context);
+      }
     });
   }
 
@@ -102,6 +140,11 @@ class _AddImageState extends State<AddImage> {
     Map<String, dynamic> data = Map();
     data['url'] = urlImage;
     data['description'] = description.text;
+    if (widget.foto != null && galleryFile == null) {
+      data['url'] = widget.foto.url;
+    } else {
+      data['url'] = urlImage != null ? urlImage : "";
+    }
     return data;
   }
 }

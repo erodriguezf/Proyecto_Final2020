@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
+import 'package:proyecto_final_2020_2/pages/gallery.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'menu_item.dart';
@@ -136,6 +137,12 @@ class _SideBarState extends State<SideBar>
                         title: "Entrenamiento",
                         onTap: () {
                           onIconPressed();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Gallery(
+                                        auth: widget.auth,
+                                      )));
                         },
                       ),
                       MenuItem(

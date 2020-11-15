@@ -11,7 +11,10 @@ class _LoadingPageState extends State<LoadingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Waiting"),
+        title: Text("Te Cuido"),
+      ),
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }

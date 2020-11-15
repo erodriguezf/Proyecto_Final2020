@@ -276,7 +276,7 @@ class _LoginPageState extends State<LoginPage> {
               'Ya existe una cuenta registrada con este correo electronico.') {
         DatabaseReference db =
             FirebaseDatabase.instance.reference().child('Users');
-        db.push().set(getUser()).then((value) {
+        db.child(value).set(getUser()).then((value) {
           widget.onSignIn();
         });
       } else {
@@ -350,6 +350,7 @@ class _LoginPageState extends State<LoginPage> {
     data['name'] = name.text;
     data['lastname'] = lastname.text;
     data['age'] = age.text;
+    data['email'] = email.text;
     return data;
   }
 }

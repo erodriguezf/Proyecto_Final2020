@@ -34,245 +34,243 @@ class _InformationState extends State<Information> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 2,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: "INFO GENERAL",
-                ),
-                Tab(
-                  text: "FASE A FASE",
-                ),
-              ],
-            ),
-            title: Text('INFORMATIVO'),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: "INFO GENERAL",
+              ),
+              Tab(
+                text: "FASE A FASE",
+              ),
+            ],
           ),
-          body: TabBarView(
-            children: [
-              SingleChildScrollView(
-                child: Container(
-                  child: Center(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "¿Qué es el Alzheimer?",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
+          title: Text('INFORMATIVO'),
+        ),
+        body: TabBarView(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "¿Qué es el Alzheimer?",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
                         ),
-                        Padding(
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
+                        ),
+                        child: Text(
+                          "La  enfermedad  de  Alzheimer  es  un  trastorno  neurológico  que  provoca  la  muerte  de  las  células  nerviosas  del  cerebro.  Por  lo  general,  la  Enfermedad  de  Alzheimer  comienza  paulatinamente  y  sus  primeros síntomas pueden atribuirse a la vejez o al olvido común. A medida en que avanza la enfer-medad, se van deteriorando las capacidades cognitivas, entre ellas la capacidad para tomar decisio-nes y llevar a cabo las tareas cotidianas, y pueden surgir modificaciones de la personalidad, así como  conductas  problemáticas.",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(fontSize: 17, color: Colors.black),
+                        ),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 0.5,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Resumen del avance de la enfermedad",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      Padding(
                           padding: EdgeInsets.only(
                             left: 25,
                             right: 25,
                             bottom: 15,
                           ),
-                          child: Text(
-                            "La  enfermedad  de  Alzheimer  es  un  trastorno  neurológico  que  provoca  la  muerte  de  las  células  nerviosas  del  cerebro.  Por  lo  general,  la  Enfermedad  de  Alzheimer  comienza  paulatinamente  y  sus  primeros síntomas pueden atribuirse a la vejez o al olvido común. A medida en que avanza la enfer-medad, se van deteriorando las capacidades cognitivas, entre ellas la capacidad para tomar decisio-nes y llevar a cabo las tareas cotidianas, y pueden surgir modificaciones de la personalidad, así como  conductas  problemáticas.",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                          ),
+                          child: Column(
+                            children: [
+                              Text(
+                                "Los síntomas de la enfermedad de Alzheimer empeoran con el tiempo, aunque la velocidad a la que avanza la enfermedad varía. En promedio, una persona con Alzheimer vive de cuatro a ocho años después del diagnóstico, pero puede vivir hasta 20 años, dependiendo de otros factores.",
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 15,
+                                style: TextStyle(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                              Text(""),
+                              Text(
+                                "Los cambios en el cerebro relacionados con el Alzheimer comienzan años antes de que aparezcan los signos de la enfermedad. Este período de tiempo, que puede durar años, se conoce como Alzheimer preclínico.",
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 15,
+                                style: TextStyle(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                              Text(""),
+                              Text(
+                                "Las etapas que siguen brindan una idea general de cómo cambian las habilidades una vez que aparecen los síntomas y solo debe usarse como guía general. Se separan en tres categorías diferentes: enfermedad de Alzheimer leve, enfermedad de Alzheimer moderada y enfermedad de Alzheimer grave. Tenga en cuenta que puede ser difícil ubicar a una persona con Alzheimer en una etapa específica, ya que las etapas se superponen.",
+                                textAlign: TextAlign.left,
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 15,
+                                style: TextStyle(
+                                    fontSize: 17, color: Colors.black),
+                              ),
+                            ],
+                          )),
+                      Divider(
+                        height: 20,
+                        thickness: 0.5,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Alzheimer de inicio temprano/precoz",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
                         ),
-                        Divider(
-                          height: 20,
-                          thickness: 0.5,
-                          color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Resumen del avance de la enfermedad",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
+                        child: Text(
+                          "El Alzheimer no es solo una enfermedad de la vejez. El Alzheimer de inicio temprano (también conocido como de inicio precoz) afecta a personas de menos de 65 años. Alrededor de un 5 por ciento de los más de 5 millones de estadounidenses con Alzheimer tienen inicio temprano.",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
-                        Padding(
-                            padding: EdgeInsets.only(
-                              left: 25,
-                              right: 25,
-                              bottom: 15,
-                            ),
-                            child: Column(
-                              children: [
-                                Text(
-                                  "Los síntomas de la enfermedad de Alzheimer empeoran con el tiempo, aunque la velocidad a la que avanza la enfermedad varía. En promedio, una persona con Alzheimer vive de cuatro a ocho años después del diagnóstico, pero puede vivir hasta 20 años, dependiendo de otros factores.",
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 15,
-                                  style: TextStyle(
-                                      fontSize: 17, color: Colors.black),
-                                ),
-                                Text(""),
-                                Text(
-                                  "Los cambios en el cerebro relacionados con el Alzheimer comienzan años antes de que aparezcan los signos de la enfermedad. Este período de tiempo, que puede durar años, se conoce como Alzheimer preclínico.",
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 15,
-                                  style: TextStyle(
-                                      fontSize: 17, color: Colors.black),
-                                ),
-                                Text(""),
-                                Text(
-                                  "Las etapas que siguen brindan una idea general de cómo cambian las habilidades una vez que aparecen los síntomas y solo debe usarse como guía general. Se separan en tres categorías diferentes: enfermedad de Alzheimer leve, enfermedad de Alzheimer moderada y enfermedad de Alzheimer grave. Tenga en cuenta que puede ser difícil ubicar a una persona con Alzheimer en una etapa específica, ya que las etapas se superponen.",
-                                  textAlign: TextAlign.left,
-                                  overflow: TextOverflow.ellipsis,
-                                  maxLines: 15,
-                                  style: TextStyle(
-                                      fontSize: 17, color: Colors.black),
-                                ),
-                              ],
-                            )),
-                        Divider(
-                          height: 20,
-                          thickness: 0.5,
-                          color: Colors.black.withOpacity(0.5),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 0.5,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "¿Quién padece Alzheimer de inicio temprano?",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Alzheimer de inicio temprano/precoz",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 25,
-                            right: 25,
-                            bottom: 15,
-                          ),
-                          child: Text(
-                            "El Alzheimer no es solo una enfermedad de la vejez. El Alzheimer de inicio temprano (también conocido como de inicio precoz) afecta a personas de menos de 65 años. Alrededor de un 5 por ciento de los más de 5 millones de estadounidenses con Alzheimer tienen inicio temprano.",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                          ),
+                        child: Text(
+                          "Muchas personas con Alzheimer de inicio temprano tienen entre 40 y 50 años. Tienen familias, carreras profesionales o son incluso cuidadores cuando el Alzheimer hace su aparición. En Estados Unidos, se estima que aproximadamente 200.000 personas tienen Alzheimer de inicio temprano.",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
-                        Divider(
-                          height: 20,
-                          thickness: 0.5,
-                          color: Colors.black.withOpacity(0.5),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 0.5,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Cómo diagnosticar el Alzheimer de inicio temprano",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "¿Quién padece Alzheimer de inicio temprano?",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 25,
-                            right: 25,
-                            bottom: 15,
-                          ),
-                          child: Text(
-                            "Muchas personas con Alzheimer de inicio temprano tienen entre 40 y 50 años. Tienen familias, carreras profesionales o son incluso cuidadores cuando el Alzheimer hace su aparición. En Estados Unidos, se estima que aproximadamente 200.000 personas tienen Alzheimer de inicio temprano.",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                          ),
+                        child: Text(
+                          "Dado que los proveedores de atención médica generalmente no esperan encontrar Alzheimer en personas más jóvenes, obtener un diagnóstico preciso del Alzheimer en etapa temprana puede ser un proceso largo y frustrante. Los síntomas suelen atribuirse incorrectamente al estrés y es posible que diferentes médicos lleguen a diagnósticos opuestos. Las personas con Alzheimer de inicio temprano pueden encontrarse en cualquier etapa de la demencia: temprana, media o final. La enfermedad afecta a todas las personas de forma diferente y los síntomas varían.",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
-                        Divider(
-                          height: 20,
-                          thickness: 0.5,
-                          color: Colors.black.withOpacity(0.5),
+                      ),
+                      Divider(
+                        height: 20,
+                        thickness: 0.5,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(20),
+                        child: Text(
+                          "Causas del inicio temprano, incluida la genética",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 17,
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.bold),
                         ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Cómo diagnosticar el Alzheimer de inicio temprano",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 25,
+                          right: 25,
+                          bottom: 15,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 25,
-                            right: 25,
-                            bottom: 15,
-                          ),
-                          child: Text(
-                            "Dado que los proveedores de atención médica generalmente no esperan encontrar Alzheimer en personas más jóvenes, obtener un diagnóstico preciso del Alzheimer en etapa temprana puede ser un proceso largo y frustrante. Los síntomas suelen atribuirse incorrectamente al estrés y es posible que diferentes médicos lleguen a diagnósticos opuestos. Las personas con Alzheimer de inicio temprano pueden encontrarse en cualquier etapa de la demencia: temprana, media o final. La enfermedad afecta a todas las personas de forma diferente y los síntomas varían.",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                          ),
+                        child: Text(
+                          "Los médicos no comprenden por qué la mayoría de los casos de Alzheimer de inicio temprano aparecen a una edad tan temprana. Pero en unos centenares de familias en todo el mundo, los científicos detectaron varios genes infrecuentes que causan directamente el Alzheimer. Las personas que heredan estos genes infrecuentes tienden a desarrollar los síntomas entre los 30, 40 y 50 años. Cuando la enfermedad de Alzheimer es causada por genes deterministas, se llama “enfermedad de Alzheimer hereditaria”, y muchos familiares en múltiples generaciones se ven afectados.",
+                          textAlign: TextAlign.left,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 15,
+                          style: TextStyle(fontSize: 17, color: Colors.black),
                         ),
-                        Divider(
-                          height: 20,
-                          thickness: 0.5,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(20),
-                          child: Text(
-                            "Causas del inicio temprano, incluida la genética",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17,
-                                color: Colors.blue[700],
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(
-                            left: 25,
-                            right: 25,
-                            bottom: 15,
-                          ),
-                          child: Text(
-                            "Los médicos no comprenden por qué la mayoría de los casos de Alzheimer de inicio temprano aparecen a una edad tan temprana. Pero en unos centenares de familias en todo el mundo, los científicos detectaron varios genes infrecuentes que causan directamente el Alzheimer. Las personas que heredan estos genes infrecuentes tienden a desarrollar los síntomas entre los 30, 40 y 50 años. Cuando la enfermedad de Alzheimer es causada por genes deterministas, se llama “enfermedad de Alzheimer hereditaria”, y muchos familiares en múltiples generaciones se ven afectados.",
-                            textAlign: TextAlign.left,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 15,
-                            style: TextStyle(fontSize: 17, color: Colors.black),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
-              SingleChildScrollView(
-                  child: Container(
-                child: _buildPanel(),
-              ))
-            ],
-          ),
+            ),
+            SingleChildScrollView(
+                child: Container(
+              child: _buildPanel(),
+            ))
+          ],
         ),
       ),
     );

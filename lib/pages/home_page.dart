@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
-import 'package:proyecto_final_2020_2/widgets/sidebar.dart';
+import 'package:proyecto_final_2020_2/pages/gallery.dart';
+import 'package:proyecto_final_2020_2/pages/information.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, this.auth, this.onSignIn}) : super(key: key);
@@ -19,9 +20,109 @@ class _HomePageState extends State<HomePage> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
-    return new Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("TE CUIDO"),
+      ),
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
+      drawer: Drawer(
+          child: Container(
+        decoration: BoxDecoration(
+            gradient:
+                LinearGradient(colors: [Color(0xFF6078ea), Color(0xFF1BB5FD)]),
+            borderRadius: BorderRadius.circular(6.0),
+            boxShadow: [
+              BoxShadow(
+                  color: Color(0xFF17ead9).withOpacity(.3),
+                  offset: Offset(0.0, 8.0),
+                  blurRadius: 8.0)
+            ]),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: ListTile(
+                title: Text(
+                  "TCuido",
+                  style: TextStyle(
+                      //color: Colors.white,
+                      fontSize: 30,
+                      fontWeight: FontWeight.w800),
+                ),
+                subtitle: Text(
+                  "Juntos contra el Alzheimer",
+                  style: TextStyle(
+                    //color: Color(0xFF1BB5FD),
+                    fontSize: 18,
+                  ),
+                ),
+                leading: CircleAvatar(
+                  child: Image.asset(
+                    "assets/logo.png",
+                  ),
+                  radius: 40,
+                ),
+              ),
+            ),
+            ListTile(
+              title: Text('Home'),
+              leading: Icon(Icons.home),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Entender el Alzheimer'),
+              leading: Icon(Icons.info),
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Information()));
+              },
+            ),
+            ListTile(
+              title: Text('Dudas Generales'),
+              leading: Icon(Icons.help),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Recursos'),
+              leading: Icon(Icons.source),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Notas'),
+              leading: Icon(Icons.note),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Galeria'),
+              leading: Icon(Icons.photo_album),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Gallery(
+                              auth: widget.auth,
+                            )));
+              },
+            ),
+            ListTile(
+              title: Text('Juegos'),
+              leading: Icon(Icons.games),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Arbol genealogico'),
+              leading: Icon(Icons.family_restroom),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text('Cerrar sesion'),
+              leading: Icon(Icons.exit_to_app),
+              onTap: signOUt,
+            ),
+          ],
+        ),
+      )),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
@@ -97,13 +198,18 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          SideBar(
-            onSignIn: widget.onSignIn,
-            auth: widget.auth,
-          ),
+          // SideBar(
+          //   onSignIn: widget.onSignIn,
+          //   auth: widget.auth,
+          // ),
         ],
       ),
     );
+  }
+
+  void signOUt() {
+    widget.auth.signOut();
+    widget.onSignIn();
   }
 }
 

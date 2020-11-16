@@ -79,6 +79,7 @@ class _GalleryState extends State<Gallery> {
                   return ImagePage(
                     foto: fotos[index],
                     auth: widget.auth,
+                    remove: () => deleteItem(index, fotos[index]),
                   );
                 }));
               },
@@ -88,13 +89,37 @@ class _GalleryState extends State<Gallery> {
           itemCount: fotos.length,
         )));
   }
+
+  void deleteItem(int index, Foto foto) {
+    setState(() {
+      db
+          .child("Users")
+          .child(widget.auth.auth.currentUser.uid)
+          .child("gallery")
+          .child(foto.key)
+          .remove();
+
+      fotos.removeAt(index);
+    });
+  }
+
+  void nada() {}
 }
 
-class ImagePage extends StatelessWidget {
+class ImagePage extends StatefulWidget {
   final Foto foto;
   final AuthFirebase auth;
+  final VoidCallback remove;
 
-  const ImagePage({Key key, this.foto, this.auth}) : super(key: key);
+  const ImagePage({Key key, this.foto, this.auth, this.remove})
+      : super(key: key);
+
+  @override
+  _ImagePageState createState() => _ImagePageState();
+}
+
+class _ImagePageState extends State<ImagePage> {
+  DatabaseReference db = FirebaseDatabase.instance.reference().child("Users");
 
   @override
   Widget build(BuildContext context) {
@@ -110,12 +135,44 @@ class ImagePage extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => AddImage(
-                                  auth: auth,
-                                  foto: foto,
+                                  auth: widget.auth,
+                                  foto: widget.foto,
                                 )));
                   },
                   child: Icon(Icons.edit),
                 )),
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text(
+                              '¿Esta seguro que desea eliminar esta imagende su galeria?'),
+                          actions: <Widget>[
+                            FlatButton(
+                              child: Text('Aceptar'),
+                              onPressed: () {
+                                widget.remove();
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            FlatButton(
+                              child: Text('Cancelar'),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Icon(Icons.delete),
+                ))
           ],
         ),
         backgroundColor: Colors.black,
@@ -125,7 +182,7 @@ class ImagePage extends StatelessWidget {
             Expanded(
               flex: 10,
               child: Image.network(
-                foto.url,
+                widget.foto.url,
                 fit: BoxFit.contain,
               ),
             ),
@@ -134,7 +191,7 @@ class ImagePage extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.all(15),
                 child: Text(
-                  foto.description,
+                  widget.foto.description,
                   style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),

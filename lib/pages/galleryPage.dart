@@ -4,17 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:proyecto_final_2020_2/classes/foto.dart';
-import 'package:proyecto_final_2020_2/pages/addImage.dart';
+import 'package:proyecto_final_2020_2/pages/addImagePage.dart';
 
-class Gallery extends StatefulWidget {
+class GalleryPage extends StatefulWidget {
   final AuthFirebase auth;
 
-  const Gallery({Key key, this.auth}) : super(key: key);
+  const GalleryPage({Key key, this.auth}) : super(key: key);
   @override
   _GalleryState createState() => _GalleryState();
 }
 
-class _GalleryState extends State<Gallery> {
+class _GalleryState extends State<GalleryPage> {
   List<Foto> fotos = new List<Foto>();
   StreamSubscription<Event> onAddedSubs;
   StreamSubscription<Event> onChangeSubs;
@@ -60,7 +60,7 @@ class _GalleryState extends State<Gallery> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => AddImage(auth: widget.auth)));
+                    builder: (context) => AddImagePage(auth: widget.auth)));
           },
           shape: StadiumBorder(),
           backgroundColor: Colors.blue,
@@ -74,17 +74,20 @@ class _GalleryState extends State<Gallery> {
               SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
           itemBuilder: (context, index) {
             return GestureDetector(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return ImagePage(
-                    foto: fotos[index],
-                    auth: widget.auth,
-                    remove: () => deleteItem(index, fotos[index]),
-                  );
-                }));
-              },
-              child: Image.network(fotos[index].url),
-            );
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return ImagePage(
+                      foto: fotos[index],
+                      auth: widget.auth,
+                      remove: () => deleteItem(index, fotos[index]),
+                    );
+                  }));
+                },
+                child: FadeInImage.assetNetwork(
+                  placeholder: "assets/defaultImage.png",
+                  image: fotos[index].url,
+                  fit: BoxFit.contain,
+                ));
           },
           itemCount: fotos.length,
         )));
@@ -102,8 +105,6 @@ class _GalleryState extends State<Gallery> {
       fotos.removeAt(index);
     });
   }
-
-  void nada() {}
 }
 
 class ImagePage extends StatefulWidget {
@@ -134,7 +135,7 @@ class _ImagePageState extends State<ImagePage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => AddImage(
+                            builder: (context) => AddImagePage(
                                   auth: widget.auth,
                                   foto: widget.foto,
                                 )));

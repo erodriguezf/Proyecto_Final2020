@@ -7,20 +7,19 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:firebase_core/firebase_core.dart' as firebase_core;
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
 import 'package:proyecto_final_2020_2/classes/foto.dart';
-import 'package:proyecto_final_2020_2/pages/gallery.dart';
 import 'package:uuid/uuid.dart';
 
-class AddImage extends StatefulWidget {
+class AddImagePage extends StatefulWidget {
   final AuthFirebase auth;
   final Foto foto;
 
-  const AddImage({Key key, this.auth, this.foto}) : super(key: key);
+  const AddImagePage({Key key, this.auth, this.foto}) : super(key: key);
 
   @override
-  _AddImageState createState() => _AddImageState();
+  _AddImagePageState createState() => _AddImagePageState();
 }
 
-class _AddImageState extends State<AddImage> {
+class _AddImagePageState extends State<AddImagePage> {
   PickedFile galleryFile;
   var description = TextEditingController();
   String urlImage;

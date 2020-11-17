@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
-import 'package:proyecto_final_2020_2/pages/gallery.dart';
-import 'package:proyecto_final_2020_2/pages/information.dart';
+import 'package:proyecto_final_2020_2/pages/galleryPage.dart';
+import 'package:proyecto_final_2020_2/pages/informationPage.dart';
+import 'package:proyecto_final_2020_2/pages/notesPage.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, this.auth, this.onSignIn}) : super(key: key);
@@ -74,8 +75,9 @@ class _HomePageState extends State<HomePage> {
               title: Text('Entender el Alzheimer'),
               leading: Icon(Icons.info),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => Information()));
+                    MaterialPageRoute(builder: (context) => InformationPage()));
               },
             ),
             ListTile(
@@ -91,16 +93,25 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Notas'),
               leading: Icon(Icons.note),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NotePage(
+                              auth: widget.auth,
+                            )));
+              },
             ),
             ListTile(
               title: Text('Galeria'),
               leading: Icon(Icons.photo_album),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Gallery(
+                        builder: (context) => GalleryPage(
                               auth: widget.auth,
                             )));
               },

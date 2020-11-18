@@ -23,6 +23,7 @@ class _SingleNotePageState extends State<SingleNotePage> {
   var content = TextEditingController();
   var title = TextEditingController();
   bool enable = true;
+  bool loading = false;
   Color pickerColor = Color(0xff443a49);
   Color currentColor = Color(0xff0398fc);
   PickedFile galleryFile;
@@ -105,50 +106,54 @@ class _SingleNotePageState extends State<SingleNotePage> {
         ),
         backgroundColor: currentColor,
       ),
-      body: Center(
-        child: Column(
-          children: [
-            Expanded(
-                flex: 7,
-                child: Container(
-                    child: Padding(
-                        padding: EdgeInsets.all(20), child: showImage()))),
-            Visibility(
-              visible: enable,
-              child: Expanded(
-                flex: 1,
-                child: Container(
-                  child: RaisedButton(
-                      onPressed: imagenSelectorGallery,
-                      child: Text('Selecciona una imagen')),
-                ),
-              ),
-            ),
-            Expanded(
-                flex: 7,
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        left: 25, right: 25, bottom: 15, top: 20),
-                    child: TextFormField(
-                      minLines: 10,
-                      controller: content,
-                      maxLines: 10,
-                      enabled: enable,
-                      style: TextStyle(fontSize: 17, color: Colors.black),
-                      decoration: InputDecoration(
-                        hintStyle:
-                            TextStyle(color: Colors.grey, fontSize: 12.0),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : Center(
+              child: Column(
+                children: [
+                  Expanded(
+                      flex: 7,
+                      child: Container(
+                          child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: showImage()))),
+                  Visibility(
+                    visible: enable,
+                    child: Expanded(
+                      flex: 1,
+                      child: Container(
+                        child: RaisedButton(
+                            onPressed: imagenSelectorGallery,
+                            child: Text('Selecciona una imagen')),
                       ),
                     ),
                   ),
-                ))
-          ],
-        ),
-      ),
+                  Expanded(
+                      flex: 7,
+                      child: Container(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              left: 25, right: 25, bottom: 15, top: 20),
+                          child: TextFormField(
+                            minLines: 10,
+                            controller: content,
+                            maxLines: 10,
+                            enabled: enable,
+                            style: TextStyle(fontSize: 17, color: Colors.black),
+                            decoration: InputDecoration(
+                              hintStyle:
+                                  TextStyle(color: Colors.grey, fontSize: 12.0),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ))
+                ],
+              ),
+            ),
     );
   }
 
@@ -186,6 +191,10 @@ class _SingleNotePageState extends State<SingleNotePage> {
   }
 
   sendData() {
+    setState(() {
+      enable = false;
+      loading = true;
+    });
     saveFirebase().then((_) {
       String uid = widget.auth.auth.currentUser.uid;
       DatabaseReference db = FirebaseDatabase.instance
@@ -200,6 +209,9 @@ class _SingleNotePageState extends State<SingleNotePage> {
         db.child(uuid).set(getNote()).then((_) {});
         Navigator.pop(context);
       }
+      setState(() {
+        loading = false;
+      });
     });
   }
 

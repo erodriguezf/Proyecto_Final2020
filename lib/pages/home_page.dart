@@ -67,11 +67,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              title: Text('Home'),
-              leading: Icon(Icons.home),
-              onTap: () {},
-            ),
-            ListTile(
               title: Text('Entender el Alzheimer'),
               leading: Icon(Icons.info),
               onTap: () {
@@ -102,6 +97,11 @@ class _HomePageState extends State<HomePage> {
                               auth: widget.auth,
                             )));
               },
+            ),
+            ListTile(
+              title: Text('Alarmas'),
+              leading: Icon(Icons.alarm),
+              onTap: () {},
             ),
             ListTile(
               title: Text('Galeria'),

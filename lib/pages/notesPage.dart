@@ -49,6 +49,18 @@ class _NotePageState extends State<NotePage> {
     onChangeSubs.cancel();
   }
 
+  void deleteItem(index) {
+    setState(() {
+      db
+          .child("Users")
+          .child(widget.auth.auth.currentUser.uid)
+          .child("notes")
+          .child(notas[index].key)
+          .remove();
+      notas.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +88,10 @@ class _NotePageState extends State<NotePage> {
           return Dismissible(
             key: ObjectKey(notas[index]),
             child: CardViewNote(notas[index], contex, widget.auth),
+            background: Container(
+              color: Colors.red,
+            ),
+            onDismissed: (direction) => deleteItem(index),
           );
         },
       ),

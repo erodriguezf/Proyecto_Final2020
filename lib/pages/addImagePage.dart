@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -26,6 +27,7 @@ class _AddImagePageState extends State<AddImagePage> {
   final ImagePicker picker = ImagePicker();
   var uuid = Uuid().v1();
   final formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   @override
   void initState() {
@@ -41,41 +43,47 @@ class _AddImagePageState extends State<AddImagePage> {
         appBar: AppBar(
           title: Text(widget.foto != null ? "Editar imagen" : "Agregar imagen"),
         ),
-        body: SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
-            child: Form(
-                key: formKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(
-                          icon: Icon(Icons.description),
-                          hintText: 'Agrege una nota a su imagen',
-                          labelText: 'Nota'),
-                      controller: description,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Por favor ingresa una nota';
-                        }
-                        return null;
-                      },
-                    ),
-                    RaisedButton(
-                        onPressed: imagenSelectorGallery,
-                        child: Text('Selecciona una imagen')),
-                    SizedBox(
-                      child: showImage(),
-                    ),
-                    RaisedButton(
-                      onPressed: () {
-                        if (formKey.currentState.validate()) {
-                          sendData();
-                        }
-                      },
-                      child: Text('Guardar'),
-                    )
-                  ],
-                ))));
+        body: loading
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                padding: EdgeInsets.all(16.0),
+                child: Form(
+                    key: formKey,
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                              icon: Icon(Icons.description),
+                              hintText: 'Agrege una nota a su imagen',
+                              labelText: 'Nota'),
+                          controller: description,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Por favor ingresa una nota';
+                            }
+                            return null;
+                          },
+                        ),
+                        RaisedButton(
+                            onPressed: imagenSelectorGallery,
+                            child: Text('Selecciona una imagen')),
+                        SizedBox(
+                          child: showImage(),
+                        ),
+                        RaisedButton(
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              sendData().then((_) {
+                                setState(() {
+                                  loading = false;
+                                });
+                              });
+                            }
+                          },
+                          child: Text('Guardar'),
+                        )
+                      ],
+                    ))));
   }
 
   Future<void> saveFirebase(String imageId) async {
@@ -110,6 +118,9 @@ class _AddImagePageState extends State<AddImagePage> {
   }
 
   sendData() {
+    setState(() {
+      loading = true;
+    });
     saveFirebase(description.text).then((_) {
       String uid = widget.auth.auth.currentUser.uid;
       DatabaseReference db = FirebaseDatabase.instance
@@ -125,6 +136,9 @@ class _AddImagePageState extends State<AddImagePage> {
         db.child(uuid).set(getimage()).then((_) {});
         Navigator.pop(context);
       }
+      setState(() {
+        loading = false;
+      });
     });
   }
 

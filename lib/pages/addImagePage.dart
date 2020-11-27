@@ -64,24 +64,50 @@ class _AddImagePageState extends State<AddImagePage> {
                             return null;
                           },
                         ),
-                        RaisedButton(
-                            onPressed: imagenSelectorGallery,
-                            child: Text('Selecciona una imagen')),
                         SizedBox(
-                          child: showImage(),
+                            height: 400,
+                            child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: showImage(),
+                            )),
+                        Row(
+                          children: [
+                            Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: RaisedButton.icon(
+                                    onPressed: () {
+                                      if (formKey.currentState.validate()) {
+                                        sendData().then((_) {
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                        });
+                                      }
+                                    },
+                                    icon: Icon(Icons.save),
+                                    label: Text('Guardar'),
+                                    color: Colors.blue,
+                                    elevation: 10,
+                                    textColor: Colors.white,
+                                  ),
+                                )),
+                            Expanded(
+                                flex: 2,
+                                child: Padding(
+                                  padding: EdgeInsets.all(20),
+                                  child: RaisedButton.icon(
+                                    onPressed: imagenSelectorGallery,
+                                    icon: Icon(Icons.image),
+                                    label: Text('Imagen'),
+                                    color: Colors.blue,
+                                    elevation: 10,
+                                    textColor: Colors.white,
+                                  ),
+                                )),
+                          ],
                         ),
-                        RaisedButton(
-                          onPressed: () {
-                            if (formKey.currentState.validate()) {
-                              sendData().then((_) {
-                                setState(() {
-                                  loading = false;
-                                });
-                              });
-                            }
-                          },
-                          child: Text('Guardar'),
-                        )
                       ],
                     ))));
   }

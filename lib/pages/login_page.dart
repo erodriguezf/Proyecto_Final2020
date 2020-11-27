@@ -19,6 +19,7 @@ enum Page { login, register }
 class _LoginPageState extends State<LoginPage> {
   bool _isSelected = false;
   Page p = Page.login;
+  bool loading = false;
   var email = TextEditingController();
   var password = TextEditingController();
   var name = TextEditingController();
@@ -62,171 +63,181 @@ class _LoginPageState extends State<LoginPage> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
-    return new Scaffold(
+    return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
-      body: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(top: 20.0),
-                child: Image.asset("assets/image_01.png"),
-              ),
-              Expanded(
-                child: Container(),
-              ),
-              Expanded(child: Image.asset("assets/image_02.png"))
-            ],
-          ),
-          SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Image.asset(
-                        "assets/logo.png",
-                        width: ScreenUtil.getInstance().setWidth(110),
-                        height: ScreenUtil.getInstance().setHeight(110),
-                      ),
-                      Text("TCuido",
-                          style: TextStyle(
-                              fontFamily: "Poppins-Bold",
-                              fontSize: ScreenUtil.getInstance().setSp(46),
-                              letterSpacing: .6,
-                              fontWeight: FontWeight.bold))
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(180),
-                  ),
-                  changePages(),
-                  SizedBox(height: ScreenUtil.getInstance().setHeight(40)),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Visibility(
-                          visible: p == Page.login ? true : false,
-                          child: Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 12.0,
-                              ),
-                              GestureDetector(
-                                onTap: _radio,
-                                child: radioButton(_isSelected),
-                              ),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              Text("Recordarme",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontFamily: "Poppins-Medium"))
-                            ],
-                          )),
-                      InkWell(
-                        child: Container(
-                          width: ScreenUtil.getInstance().setWidth(330),
-                          height: ScreenUtil.getInstance().setHeight(100),
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(colors: [
-                                Color(0xFF17ead9),
-                                Color(0xFF6078ea)
-                              ]),
-                              borderRadius: BorderRadius.circular(6.0),
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Color(0xFF6078ea).withOpacity(.3),
-                                    offset: Offset(0.0, 8.0),
-                                    blurRadius: 8.0)
-                              ]),
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                signInORregister(context);
-                              },
-                              child: Center(
-                                child: Text(
-                                    p == Page.login ? "Ingresar" : "Registrar",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: "Poppins-Bold",
-                                        fontSize: 18,
-                                        letterSpacing: 1.0)),
-                              ),
+      body: loading
+          ? Center(child: CircularProgressIndicator())
+          : Stack(
+              fit: StackFit.expand,
+              children: <Widget>[
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Padding(
+                      padding: EdgeInsets.only(top: 20.0),
+                      child: Image.asset("assets/image_01.png"),
+                    ),
+                    Expanded(
+                      child: Container(),
+                    ),
+                    Expanded(child: Image.asset("assets/image_02.png"))
+                  ],
+                ),
+                SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                        EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
+                    child: Column(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Image.asset(
+                              "assets/logo.png",
+                              width: ScreenUtil.getInstance().setWidth(110),
+                              height: ScreenUtil.getInstance().setHeight(110),
                             ),
-                          ),
+                            Text("TCuido",
+                                style: TextStyle(
+                                    fontFamily: "Poppins-Bold",
+                                    fontSize:
+                                        ScreenUtil.getInstance().setSp(46),
+                                    letterSpacing: .6,
+                                    fontWeight: FontWeight.bold))
+                          ],
                         ),
-                      )
-                    ],
+                        SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(180),
+                        ),
+                        changePages(),
+                        SizedBox(
+                            height: ScreenUtil.getInstance().setHeight(40)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Visibility(
+                                visible: p == Page.login ? true : false,
+                                child: Row(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 12.0,
+                                    ),
+                                    GestureDetector(
+                                      onTap: _radio,
+                                      child: radioButton(_isSelected),
+                                    ),
+                                    SizedBox(
+                                      width: 8.0,
+                                    ),
+                                    Text("Recordarme",
+                                        style: TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: "Poppins-Medium"))
+                                  ],
+                                )),
+                            InkWell(
+                              child: Container(
+                                width: ScreenUtil.getInstance().setWidth(330),
+                                height: ScreenUtil.getInstance().setHeight(100),
+                                decoration: BoxDecoration(
+                                    gradient: LinearGradient(colors: [
+                                      Color(0xFF17ead9),
+                                      Color(0xFF6078ea)
+                                    ]),
+                                    borderRadius: BorderRadius.circular(6.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color:
+                                              Color(0xFF6078ea).withOpacity(.3),
+                                          offset: Offset(0.0, 8.0),
+                                          blurRadius: 8.0)
+                                    ]),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    onTap: () {
+                                      signInORregister(context);
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                          p == Page.login
+                                              ? "Ingresar"
+                                              : "Registrar",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontFamily: "Poppins-Bold",
+                                              fontSize: 18,
+                                              letterSpacing: 1.0)),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(30),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              p == Page.login
+                                  ? "Quieres Registrarte? "
+                                  : "Ya tienes una cuenta?",
+                              style: TextStyle(fontFamily: "Poppins-Medium"),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                toRegister();
+                              },
+                              child: Text(
+                                  p == Page.login ? "Registrarse" : "Ingresa",
+                                  style: TextStyle(
+                                      color: Color(0xFF5d74e3),
+                                      fontFamily: "Poppins-Bold")),
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(40),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            horizontalLine(),
+                            Text("Powered by",
+                                style: TextStyle(
+                                    fontSize: 16.0,
+                                    fontFamily: "Poppins-Medium")),
+                            horizontalLine()
+                          ],
+                        ),
+                        SizedBox(
+                          height: ScreenUtil.getInstance().setHeight(10),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              "TCuido:",
+                              style: TextStyle(fontFamily: "Poppins-Medium"),
+                            ),
+                            InkWell(
+                              onTap: () {},
+                              child: Text("@lazarod, @leiderp, @erodriguez",
+                                  style: TextStyle(
+                                      color: Color(0xFF5d74e3),
+                                      fontFamily: "Poppins-Bold")),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(30),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        p == Page.login
-                            ? "Quieres Registrarte? "
-                            : "Ya tienes una cuenta?",
-                        style: TextStyle(fontFamily: "Poppins-Medium"),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          toRegister();
-                        },
-                        child: Text(p == Page.login ? "Registrarse" : "Ingresa",
-                            style: TextStyle(
-                                color: Color(0xFF5d74e3),
-                                fontFamily: "Poppins-Bold")),
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(40),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      horizontalLine(),
-                      Text("Powered by",
-                          style: TextStyle(
-                              fontSize: 16.0, fontFamily: "Poppins-Medium")),
-                      horizontalLine()
-                    ],
-                  ),
-                  SizedBox(
-                    height: ScreenUtil.getInstance().setHeight(10),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "TCuido:",
-                        style: TextStyle(fontFamily: "Poppins-Medium"),
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Text("@lazarod, @leiderp, @erodriguez",
-                            style: TextStyle(
-                                color: Color(0xFF5d74e3),
-                                fontFamily: "Poppins-Bold")),
-                      )
-                    ],
-                  )
-                ],
-              ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
     );
   }
 
@@ -261,6 +272,9 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void signInORregister(BuildContext context) {
+    setState(() {
+      loading = true;
+    });
     if (p == Page.login) {
       signIn(context);
     } else {

@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
+import 'package:proyecto_final_2020_2/pages/alarm_page.dart';
 import 'package:proyecto_final_2020_2/pages/galleryPage.dart';
+import 'package:proyecto_final_2020_2/pages/game1_card.dart';
+import 'package:proyecto_final_2020_2/pages/graphic.dart';
 import 'package:proyecto_final_2020_2/pages/informationPage.dart';
 import 'package:proyecto_final_2020_2/pages/notesPage.dart';
+
+import 'listViewGames.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key key, this.auth, this.onSignIn}) : super(key: key);
@@ -23,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return Scaffold(
       appBar: AppBar(
-        title: Text("TE CUIDO"),
+        title: Text("TCUIDO"),
       ),
       backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: true,
@@ -101,7 +106,11 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Alarmas'),
               leading: Icon(Icons.alarm),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => AlarmPage()));
+              },
             ),
             ListTile(
               title: Text('Galeria'),
@@ -119,12 +128,11 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Juegos'),
               leading: Icon(Icons.games),
-              onTap: () {},
-            ),
-            ListTile(
-              title: Text('Arbol genealogico'),
-              leading: Icon(Icons.family_restroom),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ListViewGames()));
+              },
             ),
             ListTile(
               title: Text('Cerrar sesion'),

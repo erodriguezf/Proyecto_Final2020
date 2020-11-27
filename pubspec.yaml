@@ -22,11 +22,17 @@ dependencies:
   uuid: 2.2.2
   hexcolor: ^1.0.6
   flutter_colorpicker: ^0.3.4
+  sqflite: ^1.3.0
+  flutter_local_notifications: ^1.4.4+2
+  dotted_border: ^1.0.5
+  intl: ^0.16.1
+  graphic: ^0.2.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
   flutter_bloc: ^2.1.1
+  flip_card: ^0.4.4
 
 dev_dependencies:
   flutter_test:
@@ -61,6 +67,24 @@ flutter:
    - assets/image_02.png
    - assets/logo.png
    - assets/defaultImage.png
+   - assets/add_alarm.png
+   - assets/number_memory_match.jpeg
+   - assets/horse.png
+   - assets/panda.png
+   - assets/fox.png
+   - assets/parrot.png
+   - assets/rabbit.png
+   - assets/hippo.png
+   - assets/monkey.png
+   - assets/question.png
+   - assets/zoo.png
+   - assets/correct.png
+   - assets/imagenGame.jpeg
+
+
+
+
+   
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -73,6 +97,28 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: avenir
+      fonts:
+        - asset: assets/fonts/Avenir-Book.ttf
+        - asset: assets/fonts/Avenir-Heavy.ttf
+          weight: 700
+        - asset: assets/fonts/Avenir-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Avenir-Light.ttf
+          weight: 300
+  
+    - family: CustomIcons
+      fonts:
+        - asset: assets/CustomIcons.ttf
+
+    - family: Poppins-Bold
+      fonts:
+        - asset: assets/Poppins-Bold.ttf
+
+    - family: Poppins-Medium
+      fonts:
+        - asset: assets/Poppins-Medium.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:

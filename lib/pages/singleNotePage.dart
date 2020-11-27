@@ -101,6 +101,9 @@ class _SingleNotePageState extends State<SingleNotePage> {
         title: TextField(
           controller: title,
           enabled: enable,
+          decoration: InputDecoration(
+            hintText: "Titulo",
+          ),
           style: TextStyle(
               color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
         ),
@@ -122,10 +125,14 @@ class _SingleNotePageState extends State<SingleNotePage> {
                     child: Expanded(
                       flex: 1,
                       child: Container(
-                        child: RaisedButton(
-                            onPressed: imagenSelectorGallery,
-                            child: Text('Selecciona una imagen')),
-                      ),
+                          child: RaisedButton.icon(
+                        onPressed: imagenSelectorGallery,
+                        icon: Icon(Icons.image),
+                        label: Text('Selecciona una imagen'),
+                        color: Colors.blue,
+                        elevation: 10,
+                        textColor: Colors.white,
+                      )),
                     ),
                   ),
                   Expanded(
@@ -141,6 +148,7 @@ class _SingleNotePageState extends State<SingleNotePage> {
                             enabled: enable,
                             style: TextStyle(fontSize: 17, color: Colors.black),
                             decoration: InputDecoration(
+                              hintText: "Descripcion",
                               hintStyle:
                                   TextStyle(color: Colors.grey, fontSize: 12.0),
                               border: OutlineInputBorder(

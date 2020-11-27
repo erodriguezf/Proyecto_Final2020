@@ -20,7 +20,12 @@ class CardViewNote extends StatelessWidget {
                 builder: (context) => SingleNotePage(auth: auth, note: note)));
       },
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        elevation: 10,
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
               height: 144.0,

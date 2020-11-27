@@ -313,6 +313,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text('Aceptar'),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    setState(() {
+                      loading = false;
+                    });
                   },
                 ),
               ],
@@ -349,6 +352,9 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text('Aceptar'),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    setState(() {
+                      loading = false;
+                    });
                   },
                 ),
               ],

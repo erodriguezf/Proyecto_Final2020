@@ -70,14 +70,14 @@ class _ListViewGamesState extends State<ListViewGames> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 child: Container(
-                                  width: 260,
+                                  width: 240,
                                   child: Text(
-                                    "Consiste en encontrar los números iguales en las tarjetas ocultas",
+                                    "Consiste en encontrar los números iguales en las tarjetas ocultas.",
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Color.fromARGB(255, 48, 48, 54)),
                                     overflow: TextOverflow.ellipsis,
-                                    maxLines: 2,
+                                    maxLines: 4,
                                   ),
                                 ),
                               )
@@ -141,9 +141,9 @@ class _ListViewGamesState extends State<ListViewGames> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
                                 child: Container(
-                                  width: 260,
+                                  width: 240,
                                   child: Text(
-                                    "Consiste en encontrar las imagenes iguales entre los circulos",
+                                    "Consiste en encontrar las imagenes iguales entre los circulos.",
                                     style: TextStyle(
                                         fontSize: 15,
                                         color: Color.fromARGB(255, 48, 48, 54)),

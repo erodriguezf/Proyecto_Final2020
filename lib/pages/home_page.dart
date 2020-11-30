@@ -208,6 +208,7 @@ class _HomePageState extends State<HomePage> {
                         onTap: () {},
                         child: Text("@lazarod, @leiderp, @erodriguez",
                             style: TextStyle(
+                                fontSize: 12,
                                 color: Color(0xFF5d74e3),
                                 fontFamily: "Poppins-Bold")),
                       )

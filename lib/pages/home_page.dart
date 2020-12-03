@@ -6,6 +6,7 @@ import 'package:proyecto_final_2020_2/pages/alarm_page.dart';
 import 'package:proyecto_final_2020_2/pages/galleryPage.dart';
 import 'package:proyecto_final_2020_2/pages/informationPage.dart';
 import 'package:proyecto_final_2020_2/pages/notesPage.dart';
+import 'package:proyecto_final_2020_2/pages/questions_page.dart';
 import 'package:proyecto_final_2020_2/pages/resource_page.dart';
 import 'package:proyecto_final_2020_2/pages/tableInitContent.dart';
 
@@ -83,7 +84,10 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Dudas Generales'),
               leading: Icon(Icons.help),
-              onTap: () {},
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => QuestionsPage()));
+              },
             ),
             ListTile(
               title: Text('Recursos'),

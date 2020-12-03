@@ -4,14 +4,10 @@ class GuiaInfo {
   final String iconImage;
   final String description;
   final List<String> images;
+  final String pdf;
 
-  GuiaInfo(
-    this.position, {
-    this.name,
-    this.iconImage,
-    this.description,
-    this.images,
-  });
+  GuiaInfo(this.position,
+      {this.name, this.iconImage, this.description, this.images, this.pdf});
 }
 
 List<GuiaInfo> guia = [
@@ -31,7 +27,7 @@ List<GuiaInfo> guia = [
 //           ''',
 //       images: []),
   GuiaInfo(1,
-      name: '1. ¿QUÉ ES LA RELAJACIÓN?',
+      name: 'Gerontogimnasia',
       iconImage: '',
       description:
           '''Los  movimientos  y  posturas  del  cuerpo  no  sólo  influyen  en  las  capacidades  mentales: pensamiento, recuerdos, comunicación... También tienen una fuerte influencia en el estado emocional de las personas. Los estados de nerviosismo y tensión son frecuentes en la persona con  Alzheimer,  y  también  en  el  cuidador  habitual,  debido  a  la  sobrecarga  que  supone,  en  ocasiones, su atención (sus conductas anómalas, los problemas de comunicación, la sensación de desbordamiento del problema, el exceso de responsabilidad, etc.).
@@ -42,9 +38,10 @@ En  este  manual  se  presentan  tres  propuestas  de  ejercicios  de  relajaci�
 
 Podemos definir las técnicas de relajación como el conjunto de ejercicios físicos y mentales que facilitan o inducen a la relajación global.
           ''',
-      images: []),
+      images: [],
+      pdf: "gerontogimnasia.pdf"),
   GuiaInfo(2,
-      name: '1.1 RELAJACIÓN 1. LA RESPIRACIÓN',
+      name: 'Laborterapia',
       iconImage: '',
       description: '''RELAJACIÓN 1. LA RESPIRACIÓN
           
@@ -67,9 +64,10 @@ Podemos definir las técnicas de relajación como el conjunto de ejercicios fís
 • Se colocarán las manos en el pecho. Al tomar el aire, se abrirán los brazos lentamente hasta ponerlos  en  cruz  y  se  volverá  a  la  posición  inicial  expulsando  el  aire.  El  movimiento  se  repetirá 5 veces.
 
 • Si la persona lo memoriza y es capaz de llevarlo a cabo sin problemas, el paso siguiente será combinar los dos movimientos anteriores, primero subiendo y bajando los brazos al tomar y soltar el aire y después abriendo y cerrando los brazos. Realizar estos movimientos alternativamente 6 veces, 3 de cada ejercicio de forma intercalada.''',
-      images: []),
+      images: [],
+      pdf: "laborterapia.pdf"),
   GuiaInfo(3,
-      name: '1.2 RELAJACIÓN 2. TENSIÓN-RELAJACIÓN',
+      name: 'Psicomotricidad',
       iconImage: '',
       description:
           '''•  Se  tomará  asiento  en  un  lugar  tranquilo,  cómodamente,  sin  cruzar  las  piernas,  con  las  manos reposando sobre los muslos y los pies bien apoyados en el suelo.
@@ -82,9 +80,10 @@ Podemos definir las técnicas de relajación como el conjunto de ejercicios fís
 Se contraerá con fuerza la parte del cuerpo indicada, manteniendo la tensión durante 5  segundos,  y  relajándola  después,  volviendo  a  la  posición  inicial.  Se  repetirá  la  tensión - relajación 2 veces con cada ejercicio (contraer-relajar, contraer-relajar).
 
 •  De  esta  forma  se  tensará  y  relajará  cada  segmento  corporal.  Tras  ello,  se  comentará  con  ellos la sensación de tranquilidad alcanzada.''',
-      images: []),
+      images: [],
+      pdf: "psicomotricidad.pdf"),
   GuiaInfo(4,
-      name: '1.3 RELAJACIÓN 3. LA MARIONETA',
+      name: 'Estimulación cognitiva',
       iconImage: '',
       description:
           '''• Se pedirá a los participantes que simulen ser marionetas movidas por hilos, con movimientos ágiles y rítmicos.
@@ -102,28 +101,30 @@ Se contraerá con fuerza la parte del cuerpo indicada, manteniendo la tensión d
 • A  continuación,  cortarán  el  hilo  que  sujeta  la  cabeza de modo que quede colgando sin fuerza.
 
 • Por  último,  se  perderá  la  sujeción  del  tronco,  quedando  totalmente    relajados,    primero    sentados    y    después    recostados  (si  es  posible).  El  profesional  focalizará  la  atención  hacia  la  percepción  del  movimiento  que  se  produce en el pecho y vientre al respirar, experimentando una agradable sensación de tranquilidad.''',
-      images: []),
+      images: [],
+      pdf: "estimulacionCognitiva.pdf"),
   GuiaInfo(5,
-      name: '2. QUÉ ES LA LABORTERAPIA',
+      name: 'AVD',
       iconImage: '',
       description:
           "Programa  de  actividades  que  se  seleccionan  por  su  valor  físico,  mental,  emocional  y  vocacional  en  el  tratamiento  de  ciertas  enfermedades  mentales  y  psíquicas,  por  el que se concentra la atención en un trabajo, con mejoría de la disposición general de la persona con Alzheimer para alcanzar la máxima independencia y aumentar su calidad de vida.",
-      images: []),
-  GuiaInfo(6,
-      name: '2.1 SESIÓN DE LABORTERAPIA: BOTE DE SAL',
-      iconImage: '',
-      description:
-          '''• Verter una pequeña cantidad de sal sobre unas hojas de periódico.
-• Pedir a la persona que rompa las tizas en dos trozos.
+      images: [],
+      pdf: "AVD.pdf"),
+//   GuiaInfo(6,
+//       name: '2.1 SESIÓN DE LABORTERAPIA: BOTE DE SAL',
+//       iconImage: '',
+//       description:
+//           '''• Verter una pequeña cantidad de sal sobre unas hojas de periódico.
+// • Pedir a la persona que rompa las tizas en dos trozos.
 
-• Tendrá que frotar la tiza sobre la sal hasta que ésta quede totalmente teñida del color elegido.
+// • Tendrá que frotar la tiza sobre la sal hasta que ésta quede totalmente teñida del color elegido.
 
-• Se  repetirá  la  misma  operación  con  los  diferentes  colores  de  las  tizas  en  distintas  cantidades de sal. Cuanto más intenso sea el color elegido más vistoso será el resultado.
+// • Se  repetirá  la  misma  operación  con  los  diferentes  colores  de  las  tizas  en  distintas  cantidades de sal. Cuanto más intenso sea el color elegido más vistoso será el resultado.
 
-• Una vez finalizado el proceso, se dispondrá de varios montones de sal teñida de distintos colores que se irán vertiendo poco a poco en el interior del recipiente de cristal, dejando que sea cada participante el que elija los colores. Cuando el tarro ya esté lleno, se cubrirá la superficie con un trozo de algodón presionándola con fuerza y cerrando el frasco, así la sal no se mezclará al moverlo.
+// • Una vez finalizado el proceso, se dispondrá de varios montones de sal teñida de distintos colores que se irán vertiendo poco a poco en el interior del recipiente de cristal, dejando que sea cada participante el que elija los colores. Cuando el tarro ya esté lleno, se cubrirá la superficie con un trozo de algodón presionándola con fuerza y cerrando el frasco, así la sal no se mezclará al moverlo.
 
-• Mientras  estén  pintando  la  sal,  se  podrá  aprovechar  para  hacerles  las  siguientes  preguntas: ¿De dónde se obtiene la sal? ¿Qué colores hemos utilizado? ¿Cómo está la comida cuando tiene mucha sal? ¿Y cuando tiene poca?''',
-      images: []),
+// • Mientras  estén  pintando  la  sal,  se  podrá  aprovechar  para  hacerles  las  siguientes  preguntas: ¿De dónde se obtiene la sal? ¿Qué colores hemos utilizado? ¿Cómo está la comida cuando tiene mucha sal? ¿Y cuando tiene poca?''',
+//       images: []),
   // GuiaInfo(8,
   //     name: '(ORIENTACIÓN A LA REALIDAD Y LENGUAJE, LECTOESCRITURA)',
   //     iconImage: '',

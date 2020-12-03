@@ -7,6 +7,7 @@ import 'package:proyecto_final_2020_2/pages/galleryPage.dart';
 import 'package:proyecto_final_2020_2/pages/informationPage.dart';
 import 'package:proyecto_final_2020_2/pages/notesPage.dart';
 import 'package:proyecto_final_2020_2/pages/resource_page.dart';
+import 'package:proyecto_final_2020_2/pages/tableInitContent.dart';
 
 import 'listViewGames.dart';
 
@@ -90,7 +91,7 @@ class _HomePageState extends State<HomePage> {
               onTap: () {
                 Navigator.pop(context);
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ResourcePage()));
+                    MaterialPageRoute(builder: (context) => TablePage()));
               },
             ),
             ListTile(

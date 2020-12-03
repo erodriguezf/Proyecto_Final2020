@@ -4,10 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:proyecto_final_2020_2/classes/auth_firebase.dart';
 import 'package:proyecto_final_2020_2/pages/alarm_page.dart';
 import 'package:proyecto_final_2020_2/pages/galleryPage.dart';
-import 'package:proyecto_final_2020_2/pages/game1_card.dart';
-import 'package:proyecto_final_2020_2/pages/graphic.dart';
 import 'package:proyecto_final_2020_2/pages/informationPage.dart';
 import 'package:proyecto_final_2020_2/pages/notesPage.dart';
+import 'package:proyecto_final_2020_2/pages/resource_page.dart';
 
 import 'listViewGames.dart';
 
@@ -88,7 +87,11 @@ class _HomePageState extends State<HomePage> {
             ListTile(
               title: Text('Recursos'),
               leading: Icon(Icons.source),
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ResourcePage()));
+              },
             ),
             ListTile(
               title: Text('Notas'),

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
 import 'package:proyecto_final_2020_2/classes/alarm_helper.dart';
-import 'package:proyecto_final_2020_2/classes/alarm_info.dart';
 import 'package:proyecto_final_2020_2/classes/theme_data.dart';
+import 'package:proyecto_final_2020_2/classes/alarm_info.dart';
+
 import '../main.dart';
 
 class AlarmPage extends StatefulWidget {
@@ -18,6 +19,15 @@ class _AlarmPageState extends State<AlarmPage> {
   AlarmHelper _alarmHelper = AlarmHelper();
   Future<List<AlarmInfo>> _alarms;
   List<AlarmInfo> _currentAlarms;
+  String notaAlarma;
+
+  final myController = TextEditingController();
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -37,9 +47,6 @@ class _AlarmPageState extends State<AlarmPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Alarmas"),
-      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 32, vertical: 64),
         child: Column(
@@ -229,10 +236,43 @@ class _AlarmPageState extends State<AlarmPage> {
                                                       Icons.arrow_forward_ios),
                                                 ),
                                                 ListTile(
-                                                  title: Text('Nota'),
-                                                  trailing: Icon(
-                                                      Icons.arrow_forward_ios),
-                                                ),
+                                                    title: Text('Nota'),
+                                                    trailing: Icon(Icons
+                                                        .arrow_forward_ios),
+                                                    onTap: () {
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (context) {
+                                                          return AlertDialog(
+                                                            content: TextField(
+                                                              controller:
+                                                                  myController,
+                                                              decoration: InputDecoration(
+                                                                  border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                  icon: Icon(Icons
+                                                                      .text_fields),
+                                                                  hintText:
+                                                                      'Ingrese Su Nota'),
+                                                            ),
+                                                            actions: <Widget>[
+                                                              FlatButton(
+                                                                onPressed: () {
+                                                                  notaAlarma =
+                                                                      myController
+                                                                          .text;
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                child: Text(
+                                                                    "Siguiente"),
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    }),
                                                 FloatingActionButton.extended(
                                                   onPressed: onSaveAlarm,
                                                   icon: Icon(Icons.alarm),
@@ -255,7 +295,7 @@ class _AlarmPageState extends State<AlarmPage> {
                                     ),
                                     SizedBox(height: 8),
                                     Text(
-                                      'Add Alarm',
+                                      'Agregar Alarma',
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontFamily: 'avenir'),
@@ -276,7 +316,7 @@ class _AlarmPageState extends State<AlarmPage> {
                   }
                   return Center(
                     child: Text(
-                      'Loading..',
+                      'Cargando..',
                       style: TextStyle(color: Colors.white),
                     ),
                   );
@@ -321,7 +361,7 @@ class _AlarmPageState extends State<AlarmPage> {
     var alarmInfo = AlarmInfo(
       alarmDateTime: scheduleAlarmDateTime,
       gradientColorIndex: _currentAlarms.length,
-      title: 'alarm',
+      title: myController.text,
     );
     _alarmHelper.insertAlarm(alarmInfo);
     scheduleAlarm(scheduleAlarmDateTime, alarmInfo);
